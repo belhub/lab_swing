@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
 
-public class Main{
+public class Main extends JFrame{
 
     private static JLabel userLabel;
     private static JTextField usernameText;
@@ -18,6 +18,25 @@ public class Main{
 
     public static void main(String[] args) {
         System.out.println("Program konsolowy");
+        SwingUtilities.invokeLater(() -> {
+            try {
+                Main window = new Main();
+                window.setVisible(true);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
+
+    public Main() throws HeadlessException {
+        this("Undefined");
+    }
+    public Main(String title) throws HeadlessException {
+        super(title);
+        buildFrame();
+    }
+    protected void buildFrame(){
         panel = new JPanel();
         JFrame frame = new JFrame();
 
@@ -70,7 +89,6 @@ public class Main{
 
         String user=usernameText.getText();
         String  pass=String.valueOf(passwordText.getPassword());
-        System.out.println(user+"   "+pass);
 
         if (login.containsKey(user)){
             if (login.get(user).getHaslo().equals(pass)){
@@ -87,26 +105,4 @@ public class Main{
         System.exit(0);
     }
 
-//    @Override
-//    public void actionPerformed(ActionEvent e) {
-//        Login loginData = new Login("Marek", "haslo1");
-//        Login loginData2 = new Login("Jarek", "haslo2");
-//        HashMap<String, Login> login = new HashMap<>();
-//        login.put("Marek",loginData);
-//        login.put("Jarek",loginData2);
-//
-//        String user=usernameText.getText();
-//        String  pass=String.valueOf(passwordText.getPassword());
-//        System.out.println(user+"   "+pass);
-//
-//        if (login.containsKey(user)){
-//            if (login.get(user).getHaslo().equals(pass)){
-//                panel.setBackground(Color.green);
-//            }
-//            else
-//                panel.setBackground(Color.red);
-//        }
-//        else
-//            panel.setBackground(Color.red);
-//    }
 }
