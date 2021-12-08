@@ -5,7 +5,6 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.MouseInputListener;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
 import java.util.Random;
 
 public class Main extends JFrame implements MouseInputListener {
@@ -14,8 +13,6 @@ public class Main extends JFrame implements MouseInputListener {
     int keyCode;
     int x,y;
     private final Random r = new Random();
-    ArrayList<Point> points = new ArrayList<>();
-
     public static void main(String[] args) {
         System.out.println("Program konsolowy");
         SwingUtilities.invokeLater(() -> {
@@ -48,7 +45,7 @@ public class Main extends JFrame implements MouseInputListener {
         panel.setBorder(new EmptyBorder(5,5,5,5));
         setContentPane(panel);
         panel.setLayout(null);
-        setTitle("Uciekający przycisk");
+        setTitle("Uciekający przycisk i kanwa");
 
         button = new JButton("Button");
 
@@ -70,6 +67,14 @@ public class Main extends JFrame implements MouseInputListener {
         cancel.setBounds(560,10,90,30);
         cancel.addActionListener(e->button.setBounds(150,10,90,30));
         add(cancel);
+
+        JLabel description1 = new JLabel("Naciśnik na klawiaturze 'p' aby narysować prostokąt");
+        description1.setBounds(150,350,400,20);
+        panel.add(description1);
+        JLabel description2 = new JLabel("Naciśnij na klawiaturze 'o' aby narysować owal");
+        description2.setBounds(150,400,400,20);
+        panel.add(description2);
+
     }
 
     public void kanwa(){
@@ -96,15 +101,13 @@ public class Main extends JFrame implements MouseInputListener {
     @Override
     public void mouseReleased(MouseEvent e) {
         Graphics g = getGraphics();
-        if (keyCode==KeyEvent.VK_K){
+        if (keyCode==KeyEvent.VK_P){
                 g.setColor(Color.blue);
                 g.fillRect(x, y, 40, 60);
-                points.add(new Point(x, y));
         }
         else if (keyCode==KeyEvent.VK_O) {
                 g.setColor(Color.red);
                 g.fillOval(x, y, 40, 40);
-                points.add(new Point(x, y));
         }
     }
 
